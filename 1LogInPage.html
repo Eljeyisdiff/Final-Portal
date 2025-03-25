@@ -1,22 +1,15 @@
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Log In</title>
     <link rel="stylesheet" href="1login2.css" />
-    <link
-      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
   </head>
   <body>
     <div class="LoginBox">
-      <form action="class-homepage.html" method="get">
+      <form id="loginForm" action="class-homepage.html" method="get">
         <h1>BINHS STUDENTS - PORTAL</h1>
         <div class="input-user">
           <i class="bx bxs-user"></i>
@@ -24,13 +17,7 @@
           <br />
           <div class="input-password">
             <i class="bx bxs-lock-alt"></i>
-            <input
-              id="input-pass"
-              type="password"
-              placeholder=" Password: "
-              autocomplete="off"
-              required
-            /><br />
+            <input id="input-pass" type="password" placeholder=" Password: " autocomplete="off" required /><br />
             <input id="login" type="submit" value="Log In" />
           </div>
         </div>
@@ -41,5 +28,18 @@
       </div>
     </div>
 
-  </body>
-</html>
+    <script>
+      document.getElementById('loginForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const form = event.target;
+        const action = form.action;
+        const method = form.method;
+
+        fetch(action, {
+          method: method,
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        }).then(response => {
+          if (response.status === 405) {
+            alert('Method Not Allowed: Please use the correct 
